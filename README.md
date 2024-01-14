@@ -8,6 +8,8 @@ There are a few commands that can be ran with this resource.
 - `resetwater` - Resets water configuration to game defaults.
 - `flood` - Simulates a rising water level flood.
 
+![Flood / Tsunami](./flood.png)
+
 ### Overriding default water boundary for `water.xml`
 
 The default water boundary is `minX: -4000, minY: -4000, maxX: 4500, maxY: 8000` this can be overriden, only reduced in size, by calling the following client native.
