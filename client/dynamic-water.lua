@@ -34,6 +34,13 @@ RegisterCommand('resetwater', function(source, args)
     ResetWater()
 end)
 
+-- Change this value to set the maximum flood height
+local maxFloodHeight = 400
+-- Change this value to increase/decrease the rate at which the water height changes
+local increaseRate = 0.1
+-- Change this value to increase/decrease the time it takes to reach maxFloodHeight.
+local threadWait = 100
+
 RegisterCommand('flood', function(source, args)
     Citizen.CreateThread(function()
         -- Things you could do to further enhance:
@@ -48,13 +55,7 @@ RegisterCommand('flood', function(source, args)
 
         local waterQuadCount = GetWaterQuadCount()
         local isFlooding = true
-        -- Change this value to set the maximum flood height
-        local maxFloodHeight = 400
-        -- Change this value to increase/decrease the rate at which the water height changes
-        local increaseRate = 0.1
-        -- Change this value to increase/decrease the time it takes to reach maxFloodHeight.
-        local threadWait = 100
-
+        
         while isFlooding do
             for i = 1, waterQuadCount, 1 do
                 local success, waterQuadLevel = GetWaterQuadLevel(i)
