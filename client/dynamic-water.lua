@@ -43,6 +43,24 @@ local threadWait = 100
 
 RegisterCommand('flood', function(source, args)
     Citizen.CreateThread(function()
+        local pCoords, wCoords, allPeds = nil, nil, nil
+        local ped = PlayerPedId()
+        while true do
+            pCoords = GetEntityCoords(ped)
+            wCoords = GetWaterQuadAtCoords_3d(pCoords.x, pCoords.y, pCoords.z)
+
+            if wCoords ~= -1 then
+                allPeds = GetGamePool('CPed')
+                for i = 1, #allPeds do
+                    SetPedConfigFlag(allPeds[i], 65, true)
+                    SetPedDiesInWater(allPeds[i], true)
+                end
+            end
+            Citizen.Wait(5000)
+        end
+    end)
+
+    Citizen.CreateThread(function()
         -- Things you could do to further enhance:
         --  - Configure WaveQuads and increase amplitude, remember disable all CalmingQuads which take priority!
         --  - Task all peds to flee from players/coords
@@ -55,7 +73,7 @@ RegisterCommand('flood', function(source, args)
 
         local waterQuadCount = GetWaterQuadCount()
         local isFlooding = true
-        
+
         while isFlooding do
             for i = 1, waterQuadCount, 1 do
                 local success, waterQuadLevel = GetWaterQuadLevel(i)
