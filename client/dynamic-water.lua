@@ -45,7 +45,7 @@ RegisterCommand('flood', function(source, args)
     Citizen.CreateThread(function()
         local pCoords, wCoords, allPeds = nil, nil, nil
         while true do
-            local ped = PlayerPedId()
+            ped = PlayerPedId()
             pCoords = GetEntityCoords(ped)
             wCoords = GetWaterQuadAtCoords_3d(pCoords.x, pCoords.y, pCoords.z)
 
